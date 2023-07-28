@@ -39,8 +39,8 @@ for SEED in "${SEEDS[@]}"; do
         --validation_file ${DATA_DIR}/condaqa_dev_unifiedqa.json \
         --test_file ${DATA_DIR}/condaqa_test_unifiedqa.json \
         --do_train \
-        --per_device_train_batch_size 12 \
-        --gradient_accumulation_steps 2 \
+        --per_device_train_batch_size 256 \
+        --gradient_accumulation_steps 1 \
         --learning_rate 1e-5 \
         --num_train_epochs 5 \
         --output_dir $OUTPUT_DIR \
@@ -53,8 +53,8 @@ for SEED in "${SEEDS[@]}"; do
         --summary_column answer \
         --text_column input \
         --source_prefix "" \
-        --max_source_length 400 \
-        --max_target_length 16 \
+        --max_source_length 72 \
+        --max_target_length 2 \
         --load_best_model_at_end True\
         --overwrite_output_dir # # # > ${MODEL_NAME}_results_all_${SEED}_train_${SETTING}_test_${TEST_FILE}.txt # # # We don't need this output to a file
   done

@@ -1,4 +1,4 @@
-import pandas, re
+import pandas, re, json
 
 #Here are some helper functions for formatting 
 def infinitive(phrase:str): #some inference types require infinitive phrases to fit the prompt templates, but this was not consistently followed
@@ -8,7 +8,7 @@ def clean(phrase):
            re.sub(r'\.(?=[,?])', r'', phrase    # remove extra punctuation
            ).lower().capitalize())              # standardize capitalization
 def format_instance(prompt, answer):
-    return '{"input":"'+re.sub(r'"', r'\"', prompt)+'","answer":"'+answer+'"}\n'
+    return json.dumps({"input":[prompt], "answer":[answer]})+"\n"
 
 #plausibility classifier prompt templates (from https://aclanthology.org/2021.naacl-main.346.pdf page 4392) adapted into questions
 _formats = {
