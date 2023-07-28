@@ -77,10 +77,11 @@ for split in _splits:
                             for inference_type, format_prompt in _formats.items():
                                 opposing_inferences = dataset[opposing_negation_type][original][inference_type]
                                 for opposing_inference in opposing_inferences:
-                                    prompt = format_prompt(event, opposing_inference)
-                                    instance = format_instance(prompt, 'no')
-                                    try:
-                                        writer.write(instance)
-                                    except UnicodeEncodeError: #
-                                        pass
+                                    if opposing_inference not in dataset[negation_type][original][inference_type]:
+                                        prompt = format_prompt(event, opposing_inference)
+                                        instance = format_instance(prompt, 'no')
+                                        try:
+                                            writer.write(instance)
+                                        except UnicodeEncodeError: #
+                                            pass
 
